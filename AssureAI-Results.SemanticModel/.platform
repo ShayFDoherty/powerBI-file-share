@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AssureAI-Results"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "05fd2d7a-6057-4a4c-877d-7d3448deb226"
+  }
+}

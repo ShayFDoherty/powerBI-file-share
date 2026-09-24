@@ -1,0 +1,17 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["AssureAI_BaseUrl", "AssureAI_WorkspaceId", "AssureAI_ApiKey", "fnAssureAIFeed", "Results", "Metrics"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Results
+ref table Metrics
+

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "metricStatusBar",
+  "position": {
+    "x": 16,
+    "y": 16,
+    "z": 0,
+    "height": 280,
+    "width": 1248,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "stackedBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "pillar"
+                }
+              },
+              "queryRef": "Metrics.pillar",
+              "nativeQueryRef": "pillar"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Metrics passed"
+                }
+              },
+              "queryRef": "Metrics.Metrics passed",
+              "nativeQueryRef": "Metrics passed"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Metrics failed"
+                }
+              },
+              "queryRef": "Metrics.Metrics failed",
+              "nativeQueryRef": "Metrics failed"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Metrics passed and failed by pillar'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

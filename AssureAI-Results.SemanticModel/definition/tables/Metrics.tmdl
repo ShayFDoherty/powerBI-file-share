@@ -1,0 +1,149 @@
+table Metrics
+	lineageTag: 48befe2d-158e-556a-8f80-e130fa4e0715
+
+	/// Sub-metrics that met their threshold.
+	measure 'Metrics passed' = CALCULATE(COUNTROWS(Metrics), Metrics[status] = "passed")
+		formatString: 0
+		lineageTag: 99b090e1-782b-512a-a88c-b5aa9d82eca9
+
+	/// Sub-metrics that missed their threshold.
+	measure 'Metrics failed' = CALCULATE(COUNTROWS(Metrics), Metrics[status] = "failed")
+		formatString: 0
+		lineageTag: bda412f7-4966-5ee3-8026-47c72bbc303a
+
+	/// Passed over judged; metrics that errored are in neither.
+	measure 'Pass rate' = DIVIDE([Metrics passed], [Metrics passed] + [Metrics failed])
+		formatString: 0.0%
+		lineageTag: 8cc88b3c-f686-5ae1-a1c3-818131873f7d
+
+	column workspace_id
+		dataType: string
+		lineageTag: eab0a3a6-75ff-5603-8293-649e37444e0f
+		summarizeBy: none
+		sourceColumn: workspace_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_id
+		dataType: string
+		lineageTag: 56727d07-6c4a-5811-9122-50a140e6c215
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_name
+		dataType: string
+		lineageTag: 8fafd35c-d049-5c57-a8d2-99061e403194
+		summarizeBy: none
+		sourceColumn: run_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column use_case_id
+		dataType: string
+		lineageTag: c29dafe5-d763-57bb-8598-0739a20024ba
+		summarizeBy: none
+		sourceColumn: use_case_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column use_case_title
+		dataType: string
+		lineageTag: d07a485d-e7f2-57ac-984f-4b87b2acb369
+		summarizeBy: none
+		sourceColumn: use_case_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column finished_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 416fbd52-89bf-5ca5-a579-169a9e1d4c0a
+		summarizeBy: none
+		sourceColumn: finished_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column pillar
+		dataType: string
+		lineageTag: d1e62b66-b87d-5a03-8835-40c4a07e40d9
+		summarizeBy: none
+		sourceColumn: pillar
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric_name
+		dataType: string
+		lineageTag: 92163717-8545-588f-bd0c-a1dff8775c37
+		summarizeBy: none
+		sourceColumn: metric_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		formatString: 0.00
+		lineageTag: a10b59ec-0467-5ea3-8253-17dfbcddb3aa
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column threshold
+		dataType: double
+		formatString: 0.00
+		lineageTag: e7cabcc9-10b5-5e96-86b4-593214cb7d78
+		summarizeBy: none
+		sourceColumn: threshold
+
+		annotation SummarizationSetBy = Automatic
+
+	column comparison
+		dataType: string
+		lineageTag: e19788af-1874-556e-8776-4f7bd6fc1900
+		summarizeBy: none
+		sourceColumn: comparison
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 5099ce00-b487-51ba-85fc-c0e10d0ba19f
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason
+		dataType: string
+		lineageTag: 155416c4-031f-5499-b6f1-8843f9f9bb99
+		summarizeBy: none
+		sourceColumn: reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_pillar_key
+		dataType: string
+		isHidden
+		lineageTag: 027028b7-bf62-5375-bcb5-8bd2fe6f6b9b
+		summarizeBy: none
+		sourceColumn: run_pillar_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Metrics = m
+		mode: import
+		source =
+				let
+				    Source = Table.SelectColumns(fnAssureAIFeed("results/metrics"), {"workspace_id", "run_id", "run_name", "use_case_id", "use_case_title", "finished_at", "pillar", "metric_name", "value", "threshold", "comparison", "status", "reason"}, MissingField.UseNull),
+				    Typed = Table.TransformColumnTypes(Source, {{"workspace_id", type text}, {"run_id", type text}, {"run_name", type text}, {"use_case_id", type text}, {"use_case_title", type text}, {"finished_at", type datetimezone}, {"pillar", type text}, {"metric_name", type text}, {"value", type number}, {"threshold", type number}, {"comparison", type text}, {"status", type text}, {"reason", type text}}),
+				    Utc = Table.TransformColumns(Typed, {{"finished_at", DateTimeZone.RemoveZone, type datetime}}),
+				    Add_run_pillar_key = Table.AddColumn(Utc, "run_pillar_key", each [run_id] & "|" & [pillar], type text)
+				in
+				    Add_run_pillar_key
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

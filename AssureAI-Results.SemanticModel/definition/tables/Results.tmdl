@@ -1,0 +1,245 @@
+table Results
+	lineageTag: ecfbfe5d-dc70-5167-b6c1-31ab7fe2a28f
+
+	/// Finished runs.
+	measure Runs = DISTINCTCOUNT(Results[run_id])
+		formatString: 0
+		lineageTag: 4d26f935-4624-52ba-8abe-6b8dec9e141d
+
+	/// AI use cases with at least one finished run.
+	measure 'Use cases' = DISTINCTCOUNTNOBLANK(Results[use_case_id])
+		formatString: 0
+		lineageTag: eef3679f-8490-55d2-93b9-0f7a309bf1ed
+
+	/// Provider cost as priced when each run finished. Blank means unknown, not free.
+	measure 'Total cost' = SUM(Results[cost_total])
+		formatString: #,0.00
+		lineageTag: 82938dc0-0fe7-577f-a803-bb358b3333a3
+
+	/// Mean of the pillars' anchored percentages; pillars with no score are left out.
+	measure 'Average pillar %' = AVERAGE(Results[percentage])
+		formatString: 0.0
+		lineageTag: 2e128a12-2cce-5ce0-afa9-6a0f8ffe70a6
+
+	/// Runs where a gated pillar is Not Production Ready.
+	measure 'Runs not production ready' = COALESCE(CALCULATE(DISTINCTCOUNT(Results[run_id]), Results[not_production_ready] = TRUE()), 0)
+		formatString: 0
+		lineageTag: 89cbeee2-7048-5deb-b564-53934d0369d2
+
+	column workspace_id
+		dataType: string
+		lineageTag: 5aca6bbf-266e-5e6a-be94-2a4e8e3913ee
+		summarizeBy: none
+		sourceColumn: workspace_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_id
+		dataType: string
+		lineageTag: a75f5b63-d761-51f8-aa47-210b079b80a7
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_name
+		dataType: string
+		lineageTag: b1f56e44-d39b-5a3e-9e93-1f4862c91432
+		summarizeBy: none
+		sourceColumn: run_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column use_case_id
+		dataType: string
+		lineageTag: 9ecdf750-1f9d-5b6e-9283-87b292687ec0
+		summarizeBy: none
+		sourceColumn: use_case_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column use_case_title
+		dataType: string
+		lineageTag: 026b8c4f-f219-548a-8e3a-5995147ea2e0
+		summarizeBy: none
+		sourceColumn: use_case_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column finished_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 14490a27-6081-5a93-aca1-323c307ea91d
+		summarizeBy: none
+		sourceColumn: finished_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column pillar
+		dataType: string
+		lineageTag: e08eac0b-20e1-56eb-adaf-aaf4834df2ce
+		summarizeBy: none
+		sourceColumn: pillar
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: be20c4b9-2aac-5d30-9e64-56684b4b6180
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column provider
+		dataType: string
+		lineageTag: 5004f741-ccc9-536f-bfac-b4eaa4379d4c
+		summarizeBy: none
+		sourceColumn: provider
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 827b38e5-2931-5095-87c4-3f5174a6c8c6
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9d53fdf0-cb05-5cbe-8256-c360c6a287f8
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: b7e57141-8904-5218-b442-1d64369a9f27
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier
+		dataType: string
+		lineageTag: d82f8986-9f61-5e7e-beaf-81a0666b0a7e
+		summarizeBy: none
+		sourceColumn: tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column mean
+		dataType: double
+		formatString: 0.00
+		lineageTag: 31146667-03c2-531d-a37c-aa157d82b9d1
+		summarizeBy: none
+		sourceColumn: mean
+
+		annotation SummarizationSetBy = Automatic
+
+	column percentage
+		dataType: double
+		formatString: 0.00
+		lineageTag: d3f70802-015d-527f-83c6-010fec6b1ea9
+		summarizeBy: none
+		sourceColumn: percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: double
+		formatString: 0.00
+		lineageTag: a3a01af0-46e8-58f6-89bd-9aa5ec9f0d4b
+		summarizeBy: none
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason
+		dataType: string
+		lineageTag: afc92097-69be-5d17-882b-990347b48d8f
+		summarizeBy: none
+		sourceColumn: reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_total
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 74f0b367-7a5c-58f4-a944-407d253d9cdf
+		summarizeBy: sum
+		sourceColumn: cost_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column currency
+		dataType: string
+		lineageTag: 761ff6bb-cb1d-5edb-9721-2565846ac75a
+		summarizeBy: none
+		sourceColumn: currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column overall_tier
+		dataType: string
+		lineageTag: fcd8173b-5883-57a0-bff5-b59eed84a9df
+		summarizeBy: none
+		sourceColumn: overall_tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column overall_percentage
+		dataType: double
+		formatString: 0.00
+		lineageTag: 6d698778-8e04-5a25-b393-b5dc35694203
+		summarizeBy: none
+		sourceColumn: overall_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column not_production_ready
+		dataType: boolean
+		lineageTag: 5763785a-d34d-52de-a236-b44576b13875
+		summarizeBy: none
+		sourceColumn: not_production_ready
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_pillar_key
+		dataType: string
+		isHidden
+		lineageTag: d33c48f6-d81d-54f0-a52e-e025c81466fe
+		summarizeBy: none
+		sourceColumn: run_pillar_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier_rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 19420c9b-b4ba-5d16-8b91-ebbc4cc4fb94
+		summarizeBy: none
+		sourceColumn: tier_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Results = m
+		mode: import
+		source =
+				let
+				    Source = Table.SelectColumns(fnAssureAIFeed("results"), {"workspace_id", "run_id", "run_name", "use_case_id", "use_case_title", "finished_at", "pillar", "model", "provider", "status", "created_at", "state", "tier", "mean", "percentage", "score", "reason", "cost_total", "currency", "overall_tier", "overall_percentage", "not_production_ready"}, MissingField.UseNull),
+				    Typed = Table.TransformColumnTypes(Source, {{"workspace_id", type text}, {"run_id", type text}, {"run_name", type text}, {"use_case_id", type text}, {"use_case_title", type text}, {"finished_at", type datetimezone}, {"pillar", type text}, {"model", type text}, {"provider", type text}, {"status", type text}, {"created_at", type datetimezone}, {"state", type text}, {"tier", type text}, {"mean", type number}, {"percentage", type number}, {"score", type number}, {"reason", type text}, {"cost_total", type number}, {"currency", type text}, {"overall_tier", type text}, {"overall_percentage", type number}, {"not_production_ready", type logical}}),
+				    Utc = Table.TransformColumns(Typed, {{"finished_at", DateTimeZone.RemoveZone, type datetime}, {"created_at", DateTimeZone.RemoveZone, type datetime}}),
+				    Add_run_pillar_key = Table.AddColumn(Utc, "run_pillar_key", each [run_id] & "|" & [pillar], type text),
+				    Add_tier_rank = Table.AddColumn(Add_run_pillar_key, "tier_rank", each if [tier] = "not_production_ready" then 0 else if [tier] = "bronze" then 1 else if [tier] = "silver" then 2 else if [tier] = "gold" then 3 else null, Int64.Type)
+				in
+				    Add_tier_rank
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

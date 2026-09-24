@@ -1,0 +1,54 @@
+/// The address AssureAI's API is served at, ending /api.
+expression AssureAI_BaseUrl = "https://duefb3j09r9a9.cloudfront.net" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 86ae142e-5f09-5389-8c60-5edba0e95688
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
+/// The workspace whose results the report reads, from the /workspaces page.
+expression AssureAI_WorkspaceId = "199755c3-b872-41a9-b882-fc5d01db89f2" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: ad5e05a6-148f-5168-b8c9-d13bb68912f4
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
+/// A read-only API key for the workspace (Workspaces -> API Keys). Clear it before saving as .pbit.
+expression AssureAI_ApiKey = "aai_2alqcqd4fqbmff3LIZP2mw57TCtWxEF-6FoEFq9Me3w" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 0b4b2a9f-bc99-5d2c-bb19-d836e5a1d7d1
+
+	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navigation
+
+/// Reads every page of one AssureAI results feed grain.
+expression fnAssureAIFeed =
+		// Every row of one feed grain: follows next_cursor until the last page.
+		// Web.Contents keeps the parameter base URL constant and puts the rest in
+		// RelativePath and Query, which is what lets the Power BI service refresh it.
+		(path as text) as table =>
+		let
+		    Fetch = (cursor as nullable text) as record =>
+		        Json.Document(
+		            Web.Contents(
+		                AssureAI_BaseUrl,
+		                [
+		                    RelativePath = "workspaces/" & AssureAI_WorkspaceId & "/" & path,
+		                    Query = [limit = "500"] & (if cursor = null then [] else [cursor = cursor]),
+		                    Headers = [#"X-API-Key" = AssureAI_ApiKey]
+		                ]
+		            )
+		        ),
+		    Pages = List.Generate(
+		        () => Fetch(null),
+		        each _ <> null,
+		        each if [next_cursor] = null then null else Fetch([next_cursor])
+		    ),
+		    Rows = List.Combine(List.Transform(Pages, each [rows]))
+		in
+		    Table.FromRecords(Rows)
+	lineageTag: 3539f8b6-beee-5f45-8a48-5f36815380df
+
+	annotation PBI_ResultType = Function
+

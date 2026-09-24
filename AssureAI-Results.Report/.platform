@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "AssureAI-Results"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1dce1b48-b158-4313-a04c-1544e011a2a4"
+  }
+}
