@@ -1,0 +1,177 @@
+{
+    "name": "AssureAI Results",
+    "dataColors": [
+        "#2E3A87",
+        "#00A896",
+        "#5C6BC0",
+        "#F2A93B",
+        "#7B4B94",
+        "#8A94A6",
+        "#B8C4CE",
+        "#1E4E8C"
+    ],
+    "foreground": "#1B1F2A",
+    "foregroundNeutralSecondary": "#5B6370",
+    "foregroundNeutralTertiary": "#8A92A0",
+    "background": "#FFFFFF",
+    "backgroundLight": "#F5F6F9",
+    "backgroundNeutral": "#DEE2E9",
+    "tableAccent": "#2E3A87",
+    "good": "#1E8E5A",
+    "neutral": "#F2A93B",
+    "bad": "#D64550",
+    "maximum": "#2E3A87",
+    "center": "#8A94A6",
+    "minimum": "#EAF0F6",
+    "textClasses": {
+        "callout": {
+            "fontSize": 36,
+            "fontFace": "Consolas",
+            "color": "#1B1F2A"
+        },
+        "title": {
+            "fontSize": 13,
+            "fontFace": "Segoe UI Semibold",
+            "color": "#1B1F2A"
+        },
+        "header": {
+            "fontSize": 12,
+            "fontFace": "Segoe UI Semibold",
+            "color": "#1B1F2A"
+        },
+        "label": {
+            "fontSize": 10.5,
+            "fontFace": "Segoe UI",
+            "color": "#1B1F2A"
+        }
+    },
+    "visualStyles": {
+        "*": {
+            "*": {
+                "dropShadow": [
+                    {
+                        "show": false
+                    }
+                ],
+                "border": [
+                    {
+                        "show": false
+                    }
+                ]
+            }
+        },
+        "page": {
+            "*": {
+                "background": [
+                    {
+                        "color": {
+                            "solid": {
+                                "color": "#F5F6F9"
+                            }
+                        },
+                        "transparency": 0
+                    }
+                ],
+                "outspace": [
+                    {
+                        "color": {
+                            "solid": {
+                                "color": "#F5F6F9"
+                            }
+                        },
+                        "transparency": 0
+                    }
+                ]
+            }
+        },
+        "clusteredBarChart": {
+            "*": {
+                "categoryAxis": [
+                    {
+                        "innerPadding": 45,
+                        "showAxisTitle": false
+                    }
+                ],
+                "valueAxis": [
+                    {
+                        "show": false,
+                        "gridlineShow": false
+                    }
+                ],
+                "labels": [
+                    {
+                        "show": true
+                    }
+                ]
+            }
+        },
+        "clusteredColumnChart": {
+            "*": {
+                "valueAxis": [
+                    {
+                        "gridlineColor": {
+                            "solid": {
+                                "color": "#DEE2E9"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "lineChart": {
+            "*": {
+                "valueAxis": [
+                    {
+                        "gridlineColor": {
+                            "solid": {
+                                "color": "#DEE2E9"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "tableEx": {
+            "*": {
+                "columnHeaders": [
+                    {
+                        "fontColor": {
+                            "solid": {
+                                "color": "#FFFFFF"
+                            }
+                        },
+                        "backColor": {
+                            "solid": {
+                                "color": "#2E3A87"
+                            }
+                        }
+                    }
+                ],
+                "grid": [
+                    {
+                        "gridVertical": false,
+                        "gridHorizontal": true,
+                        "gridHorizontalColor": {
+                            "solid": {
+                                "color": "#DEE2E9"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "slicer": {
+            "*": {
+                "background": [
+                    {
+                        "color": {
+                            "solid": {
+                                "color": "#FFFFFF"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

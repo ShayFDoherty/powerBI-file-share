@@ -1,0 +1,138 @@
+{
+ "name": "2i Value Ledger",
+ "dataColors": [
+  "#00704A",
+  "#5FAF8A",
+  "#A9D3BF",
+  "#1B4D3E",
+  "#7A8C85",
+  "#C9D6D0",
+  "#2F8F6B",
+  "#D7E8DF"
+ ],
+ "foreground": "#1B1F1D",
+ "foregroundNeutralSecondary": "#5B6360",
+ "foregroundNeutralTertiary": "#8A928F",
+ "background": "#FFFFFF",
+ "backgroundLight": "#F4F6F5",
+ "backgroundNeutral": "#DDE2E0",
+ "tableAccent": "#00704A",
+ "good": "#00704A",
+ "neutral": "#B98B1D",
+ "bad": "#B3261E",
+ "maximum": "#00704A",
+ "center": "#A9D3BF",
+ "minimum": "#EAF4EF",
+ "textClasses": {
+  "callout": {
+   "fontSize": 36,
+   "fontFace": "Consolas",
+   "color": "#1B1F1D"
+  },
+  "title": {
+   "fontSize": 13,
+   "fontFace": "Segoe UI Semibold",
+   "color": "#1B1F1D"
+  },
+  "header": {
+   "fontSize": 12,
+   "fontFace": "Segoe UI Semibold",
+   "color": "#1B1F1D"
+  },
+  "label": {
+   "fontSize": 10.5,
+   "fontFace": "Segoe UI",
+   "color": "#1B1F1D"
+  }
+ },
+ "visualStyles": {
+  "*": {
+   "*": {
+    "dropShadow": [
+     {
+      "show": false
+     }
+    ],
+    "border": [
+     {
+      "show": false
+     }
+    ]
+   }
+  },
+  "page": {
+   "*": {
+    "background": [
+     {
+      "color": {
+       "solid": {
+        "color": "#F4F6F5"
+       }
+      },
+      "transparency": 0
+     }
+    ],
+    "outspace": [
+     {
+      "color": {
+       "solid": {
+        "color": "#F4F6F5"
+       }
+      },
+      "transparency": 0
+     }
+    ]
+   }
+  },
+  "clusteredBarChart": {
+   "*": {
+    "categoryAxis": [
+     {
+      "innerPadding": 45,
+      "showAxisTitle": false
+     }
+    ],
+    "valueAxis": [
+     {
+      "show": false,
+      "gridlineShow": false
+     }
+    ],
+    "labels": [
+     {
+      "show": true
+     }
+    ]
+   }
+  },
+  "tableEx": {
+   "*": {
+    "columnHeaders": [
+     {
+      "fontColor": {
+       "solid": {
+        "color": "#FFFFFF"
+       }
+      },
+      "backColor": {
+       "solid": {
+        "color": "#00704A"
+       }
+      }
+     }
+    ],
+    "grid": [
+     {
+      "gridVertical": false,
+      "gridHorizontal": true,
+      "gridHorizontalColor": {
+       "solid": {
+        "color": "#DDE2E0"
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}
